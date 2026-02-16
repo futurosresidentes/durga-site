@@ -41,6 +41,18 @@ document.querySelectorAll(
   observer.observe(el);
 });
 
+// Mute/Unmute video Nosotros
+const muteBtn = document.getElementById('muteBtn');
+const nosotrosVideo = document.getElementById('nosotrosVideo');
+const iconMuted = muteBtn.querySelector('.icon-muted');
+const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
+
+muteBtn.addEventListener('click', () => {
+  nosotrosVideo.muted = !nosotrosVideo.muted;
+  iconMuted.style.display = nosotrosVideo.muted ? 'block' : 'none';
+  iconUnmuted.style.display = nosotrosVideo.muted ? 'none' : 'block';
+});
+
 // Smooth scroll offset for sticky header
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {

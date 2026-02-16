@@ -398,6 +398,7 @@ a {
 }
 
 .nosotros-video {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--sombra);
@@ -407,6 +408,27 @@ a {
   width: 100%;
   display: block;
   border-radius: var(--radius);
+}
+
+.mute-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.mute-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .nosotros-content h2 {
