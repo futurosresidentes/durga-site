@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "WebFetch(domain:stradabrand.co)",
+      "WebFetch(domain:galeriamurano.com)",
+      "WebFetch(domain:oreydashi.com)",
+      "Bash(timeout 5 node:*)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)",
+      "Bash(gh auth status:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
