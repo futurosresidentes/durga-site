@@ -484,14 +484,13 @@ a {
 .galeria-item {
   border-radius: var(--radius);
   overflow: hidden;
-  aspect-ratio: 3/4;
   cursor: pointer;
 }
 
 .galeria-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
   transition: transform 0.5s ease;
 }
 
