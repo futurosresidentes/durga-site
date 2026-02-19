@@ -64,14 +64,11 @@ const coloresConfig = {
 // Lista ordenada de colores para renderizar
 const coloresOrden = ['gris', 'negro', 'coral', 'azul', 'azulMarino', 'crema', 'camel', 'lila', 'azulJean'];
 
-// Función para obtener imagen del producto
-// Patrón: /img/productos/{tipo}-{talla}-{colorArriba}-{colorAbajo}.jpg
-function getProductImage(productoId, talla, colorArriba, colorAbajo) {
-  return `/img/productos/${productoId}-${talla}-${colorArriba}-${colorAbajo}.jpg`;
-}
+// Imagen base para el color changer (Canvas)
+const BASE_IMG = '/img/productos/cama-base-web.jpg';
 
-// Imagen placeholder por defecto
-const PLACEHOLDER_IMG = '/img/hero/562072963_18024946214743705_1687434606148405914_n.jpg';
+// Instancia global del color changer
+let bedColorChanger = null;
 
 // Función para formatear precio en COP
 function formatearPrecio(precio) {
@@ -132,6 +129,15 @@ function initProductoDetalle() {
 
   // Renderizar características
   renderCaracteristicas(producto);
+
+  // Inicializar Color Changer con Canvas
+  const canvas = document.getElementById('productoCanvas');
+  if (canvas) {
+    bedColorChanger = new BedColorChanger(canvas, BASE_IMG);
+    bedColorChanger.onReady(() => {
+      actualizarVista(producto, state);
+    });
+  }
 
   // Actualizar vista
   actualizarVista(producto, state);
@@ -252,15 +258,12 @@ function actualizarVista(producto, state) {
   // Medidas info
   document.getElementById('medidasInfo').textContent = `${state.talla} — ${tallaInfo.medidas} — ${tallaInfo.pesoRecomendado}`;
 
-  // Imagen principal
-  const mainImg = document.getElementById('productoImgMain');
-  const imgPath = getProductImage(state.tipo, state.talla, state.colorArriba, state.colorAbajo);
-  mainImg.src = imgPath;
-  mainImg.onerror = function () {
-    this.src = PLACEHOLDER_IMG;
-    this.onerror = null;
-  };
-  mainImg.alt = `${producto.nombre} — ${state.talla} ${coloresConfig[state.colorArriba].nombre} / ${coloresConfig[state.colorAbajo].nombre}`;
+  // Aplicar colores a la imagen de la cama via Canvas
+  if (bedColorChanger && bedColorChanger.ready) {
+    const topHex = coloresConfig[state.colorArriba].hex;
+    const bottomHex = coloresConfig[state.colorAbajo].hex;
+    bedColorChanger.applyColors(topHex, bottomHex);
+  }
 
   // Preview de combinación de colores
   updateColorPreview(state);

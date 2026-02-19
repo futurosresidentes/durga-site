@@ -917,7 +917,8 @@ a {
   margin-bottom: 1rem;
 }
 
-.producto-img-main img {
+.producto-img-main img,
+.producto-img-main canvas {
   width: 100%;
   height: auto;
   display: block;
